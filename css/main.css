@@ -1,0 +1,39 @@
+body
+{
+	background-color: #2F3336;
+	color: #efefef;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+}
+
+
+@media (min-width: 1200px)
+{
+
+}
+
+svg {
+background-color:none;
+}
+
+.pig_body, .pig_ear{
+fill: none;
+stroke-width: 10;
+stroke: black;
+}
+
+.pig_nose{
+fill: none;
+stroke-width: 10;
+stroke: black;
+}
+
+.pig_detail{
+stroke: black;
+stroke-width: 10;
+fill: black;}
+
+.pig_leg{
+fill: none;
+stroke-width: 10;
+stroke: black;}
