@@ -1,30 +1,40 @@
 body
 {
-	background-color: #2F3336;
-	color: #efefef;
+	background-color: white;
+	color: black;
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
 }
+
+.without_border{
+border-style: none !important;}
+
+.myColor{
+background-color: #9400D3 !important;
+color: white !important;}
 
 .min_width{
 	max-width: 330px;
 }
 
 #sing_in_window {
-	display: flex;
-	display: -ms-flexbox;
+
 	-ms-flex-align: center;
 	align-items: center;
-	padding-top: 60px;
-	padding-bottom: 60px;
+	padding-top: 80px;
+
 }
 
+.separator{
+	min-height:5px;
+	border-bottom: 1px ridge black;}
+	
 .form-signin {
   width: 100%;
   max-width: 330px;
   padding: 15px;
-  margin: auto;
 }
+
 .form-signin .checkbox {
   font-weight: 400;
 }
@@ -64,24 +74,30 @@ svg {
 background-color:none;
 }
 
+#register_btn{
+	background-color: red !important;
+	max-width: 250px;
+	border: 1px solid yellow;
+}
+
 .pig_body, .pig_ear{
 fill: none;
-stroke-width: 10;
-stroke: black;
+stroke-width: 20;
+stroke: currentColor;
 }
 
 .pig_nose{
 fill: none;
-stroke-width: 10;
-stroke: black;
+stroke-width: 20;
+stroke: currentColor;
 }
 
 .pig_detail{
-stroke: black;
-stroke-width: 10;
-fill: black;}
+stroke: currentColor;
+stroke-width: 20;
+fill: currentColor;}
 
 .pig_leg{
 fill: none;
-stroke-width: 10;
-stroke: black;}
+stroke-width: 20;
+stroke: currentColor;}
