@@ -24,11 +24,11 @@
 <body>
 
 <header>
-	<div class="container-fluid bg-white myColor">
+	<div class="container-fluid bg-light myColor">
 		<div class="row">
 			<nav class="navbar navbar-light py-0 py-sm-1 col">
 			  <a class="d-flex navbar-brand my-0 py-1 mx-auto mx-sm-4" href="#">
-				 <svg xmlns="http://www.w3.org/2000/svg" class="d-inline-block align-center py-1 my-1" viewBox="-50 275 700 600" fill-rule="evenodd" width="42" height="42" role="img" focusable="false">
+				 <svg xmlns="http://www.w3.org/2000/svg" class="d-inline-block align-center py-1 my-1 myColor" viewBox="-50 275 700 600" fill-rule="evenodd" width="42" height="42" role="img" focusable="false">
 					<g style="stroke:#000000; stroke-width:0.708661; stroke-linejoin:round; stroke-linecap:round; fill:none">
 						<g class="pig_leg">
 							<path 
@@ -72,7 +72,7 @@
 						</g>
 					</g>
 				</svg>
-				 <h5 class="h3 d-inline-block font-weight-normal align-center ml-1 py-1 my-1">Skarbonka</h5>
+				 <h5 class="h3 d-inline-block font-weight-normal align-center ml-1 py-1 my-1 myColor">Skarbonka</h5>
 			  </a>
 			</nav>
 		</div>
@@ -80,23 +80,48 @@
 </header>
 	
 <main>
-	<div id="sing_in_window" class="text-center">
-		<form class="form-signin">
-			<h1 class="h6 mb-2 font-weight-normal">Please sign in</h1>
-			<label for="inputEmail" class="sr-only">Email address</label>
-			<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-			<label for="inputPassword" class="sr-only">Password</label>
-			<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-			<div class="checkbox mb-3">
-				<label>
-				<input type="checkbox" value="remember-me"> Remember me
-				</label>
+	<div id="sing_in_window" class="container text-center">
+		<div class="row justify-content-center">
+			<div class="col-sm-5 d-sm-block d-none pr-0" style="max-width: 330px;border-right: 1px dotted black; margin-top:3.5rem;">
+				<figure>
+					<img src="img/hen.svg" alt="Kura" role="img">
+					<figcaption>
+						<blockquote class="blockquote mt-5">
+							<p class="mb-0 mt-1">Grosz do grosza, a będzie kokosza</p>
+						</blockquote>
+					</figcaption>
+				</figure>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
-		</form>
-	</div>		
+			<form class="form-signin col-sm-5 pl-sm-5">
+				<img src="img/bag.svg" alt="Kasa" role="img" style="width:80px; height:auto;">
+				<h1 class="h6 mb-2 font-weight-normal">Zaloguj się</h1>
+				<label for="inputEmail" class="sr-only">Adres email</label>
+				<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+				<label for="inputPassword" class="sr-only">Hasło</label>
+				<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+				<div class="checkbox mb-3">
+					<label>
+					<input type="checkbox" value="remember-me"> Pamiętaj mnnie
+					</label>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block mb-4 myColor without_border" type="submit">Zaloguj się</button>
+				<div class="d-block separator"></div>
+				<a href="#" class="btn btn-lg btn-secondary btn-block mx-auto mt-4 without_border" role="button" id="register_btn">Załóż konto</a>
+				
+			</form>
+		</div>
+		</div>
 </main>
+
+<footer>
+		<div class="container justify-content-center mt-5">
+			<div class="row justify-content-center"
+				<p class="mt-5 mb-3 text-muted"><a class="mr-1" href="#">Mateusz Nowakowski </a> &copy; 2017-2019</p>
+			</div>
+		</div>
+</footer>
+			
+
 	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	
