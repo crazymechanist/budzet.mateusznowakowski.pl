@@ -17,7 +17,7 @@ color: white !important;}
 	max-width: 330px;
 }
 
-#sing_in_window {
+.form_window {
 
 	-ms-flex-align: center;
 	align-items: center;
@@ -31,7 +31,7 @@ color: white !important;}
 	
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 500px;
   padding: 15px;
 }
 
@@ -72,6 +72,10 @@ font-size: 3.5rem;
 
 svg {
 background-color:none;
+}
+
+.my_btn{
+	max-width: 320px;
 }
 
 #register_btn{
