@@ -15,11 +15,65 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/fontello.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Jedzenie', 'Kwota'],
+          ['Transport',     999],
+          ['Telekomunikacja',      999],
+          ['Opieka zdrowotna',  999],
+          ['Ubranie', 999],
+          ['Higiena',    999],
+          ['Dzieci',    999],
+          ['Rozrywka',    999],
+          ['Wycieczka',    999],
+          ['Książki',    999],
+          ['Oszczędności',    999],
+          ['Na złotą jesień, czyli emeryturę',    999],
+          ['Spłata długów	',    999],
+          ['Darowizna',    999],
+        ]);
+			var options = {
+			title:'Moje wydatki',
+			legend: 'none',
+			slices: {0: {color: 'black'}, 3: {color: 'red'}},
+			pieSliceText: 'label',
+			width: '100%',
+			height: '700px'
+			};
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&amp;subset=latin-ext" rel="stylesheet">
 	
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
+	<style>
+	#chart_wrap {
+    position: relative;
+    padding-bottom: 100%;
+    height: 0;
+    overflow:hidden;
+	}
+
+	#piechart {
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 width:100%;
+	 height:500px;
+	}
+	</style>
+
 	
 </head>
 
@@ -96,9 +150,8 @@
 	</div>
 </header>
 	
-	
+	<main>
 	<div class="container">
-		</nav>
 		<div class="p-3">
 			<div id="myCarousel" class="carousel slide" data-interval="false">
 				<ol class="carousel-indicators">
@@ -108,7 +161,10 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="img/money.jpg" class="d-block w-100" style="height:100%; width:auto;" alt="...">
+						<div id="chart_wrap">
+							<div id="piechart"></div>
+						</div>
+
 					</div>
 					<div class="carousel-item">
 						<img src="img/piggy-bank.jpg" class="d-block w-100" style="height:100%; width:auto;" alt="...">
@@ -127,14 +183,11 @@
 				</a>
 			</div>
 		</div>
+		
 	</div>
+	</main>
 
-	
-<main>
-<div class="container text-center form_window">
 
-</div>
-</main>
 
 <footer>
 		<div class="container justify-content-center mt-5">
