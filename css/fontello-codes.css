@@ -3,3 +3,9 @@
 .icon-logout:before { content: '\e801'; } /* '' */
 .icon-calendar:before { content: '\e802'; } /* '' */
 .icon-plus:before { content: '\e803'; } /* '' */
+.icon-right-open-outline:before { content: '\e804'; } /* '' */
+.icon-left-open-outline:before { content: '\e805'; } /* '' */
+.icon-record-outline:before { content: '\e806'; } /* '' */
+.icon-record:before { content: '\e807'; } /* '' */
+.icon-minus-outline:before { content: '\e808'; } /* '' */
+.icon-minus:before { content: '\e809'; } /* '' */
