@@ -23,25 +23,42 @@
       function drawChart() {
 
 			var data = google.visualization.arrayToDataTable([
-			['Jedzenie', 'Kwota'],
-			['Transport',     999, ],
-			['Telekomunikacja',      999],
-			['Opieka zdrowotna',  999],
-			['Ubranie', 999],
-			['Higiena',    999],
-			['Dzieci',    999],
-			['Rozrywka',    999],
-			['Wycieczka',    999],
-			['Książki',    999],
-			['Oszczędności',    999],
-			['Na złotą jesień, czyli emeryturę',    999],
-			['Spłata długów	',    999],
-			['Darowizna',    999],
+			['Wydatek', 'Kwota'],
+			['Jedzenie', 800],
+			['Transport',     50, ],
+			['Telekomunikacja',      100],
+			['Opieka zdrowotna',  300],
+			['Ubranie', 300],
+			['Higiena',    100],
+			['Dzieci',    500],
+			['Rozrywka',    200],
+			['Wycieczka',    600],
+			['Książki',    100],
+			['Oszczędności',    500],
+			['Na złotą jesień, czyli emeryturę',    400],
+			['Spłata długów	',    30],
+			['Darowizna',    50],
 			]);
 		  
 			var options = {
 			legend: 'none',
 			pieSliceText: 'label',
+			slices: {
+			0: { color: '#3366CC' },
+			1: { color: '#dc3912' },
+			2: { color: '#FF9900' },
+			3: { color: '#109618' },
+			4: { color: '#990099' },
+			5: { color: '#0099C6' },
+			6: { color: '#DD4477' },
+			7: { color: '#66AA00' },
+			8: { color: '#B82E2E' },
+			9: { color: '#316395' },
+			10: { color: '#994499' },
+			11: { color: '#22AA99' },
+			12: { color: '#AAAA11' },
+			13: { color: '#6633CC' },
+			},
 			width: '100%',
 			height: '500px'
 			};
@@ -147,6 +164,121 @@
 					<i class="icon-right-open-outline"></i>
 				 </div>
 			</div>
+		</div>
+		<div class="row row-cols-1 row-cols-md-3">
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#3366CC; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Jedzenie</h5>
+						<p class="card-text">800 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#dc3912; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Transport</h5>
+						<p class="card-text">50 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#FF9900; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Telekomunikacja</h5>
+						<p class="card-text">100 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#109618; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Opieka zdrowotna</h5>
+						<p class="card-text">300 PLN</p>
+					</div>
+				</div>
+			</div>			
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#990099; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Ubranie</h5>
+						<p class="card-text">300 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#0099C6; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Higiena</h5>
+						<p class="card-text">100 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#DD4477; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Dzieci</h5>
+						<p class="card-text">500 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#66AA00; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Rozrywka</h5>
+						<p class="card-text">200 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#B82E2E; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Wycieczka</h5>
+						<p class="card-text">600 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#316395; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Książki</h5>
+						<p class="card-text">100 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#994499; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Oszczędności</h5>
+						<p class="card-text">500 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#22AA99; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Na złotą jesień, czyli emeryturę</h5>
+						<p class="card-text">400 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#AAAA11; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Spłata długów</h5>
+						<p class="card-text">30 PLN</p>
+					</div>
+				</div>
+			</div>
+			<div class="col mb-2">
+				<div class="card text-center" style="background-color:#6633CC; color: white;">
+					<div class="card-body">
+						<h5 class="card-title">Darowizna</h5>
+						<p class="card-text">50 PLN</p>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	</main>
