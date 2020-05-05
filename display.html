@@ -152,6 +152,37 @@
 	
 	<main>
 	<div class="container">
+		<div class="row justify-content-end">
+			<button type="button" class="btn btn-outline-dark mb-2 mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="icon-calendar"></i> Zmień zakres dat</button>
+			<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Zakres dat</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form action="change_dete.php" method="post">
+								<div>
+									<label for="initial_date" class="d-inline-flex p-2" > Data początkowa: </label>
+									<input class="form-control d-inline-flex" style="width:50%" type="date" id="dinitial_date">
+								</div>
+								<div>
+									<label for="final_date" class="d-inline-flex p-2" > Data końcowa: </label>
+									<input class="form-control d-inline-flex" style="width:50%" type="date" id="final_date">
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Wyjdź</button>
+							<button type="button" class="btn btn-primary">Zapisz</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="position-relative">
 			<div id="piechart" class="position-relative" style="height:600px;"></div>
 			<div class="row align-items-center" style="position: absolute;	width: 100%;	height: 100%;	left: 0px;	bottom: 0px;">
@@ -165,120 +196,120 @@
 				 </div>
 			</div>
 		</div>
-		<div class="row row-cols-1 row-cols-md-3">
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#3366CC; color: white;">
+		
+		<div class="row">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#3366CC; color: white">
 					<div class="card-body">
-						<h5 class="card-title">Jedzenie</h5>
-						<p class="card-text">800 PLN</p>
+						<h5 class="card-title h6">Jedzenie</h5>
+						<p class="card-text h6">800 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#dc3912; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#dc3912; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Transport</h5>
-						<p class="card-text">50 PLN</p>
+						<h5 class="card-title h6">Transport</h5>
+						<p class="card-text h6">50 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#FF9900; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#FF9900; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Telekomunikacja</h5>
-						<p class="card-text">100 PLN</p>
+						<h5 class="card-title h6">Telekomunikacja</h5>
+						<p class="card-text h6">100 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#109618; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#109618; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Opieka zdrowotna</h5>
-						<p class="card-text">300 PLN</p>
+						<h5 class="card-title h6">Opieka zdrowotna</h5>
+						<p class="card-text h6">300 PLN</p>
 					</div>
 				</div>
 			</div>			
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#990099; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#990099; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Ubranie</h5>
-						<p class="card-text">300 PLN</p>
+						<h5 class="card-title h6">Ubranie</h5>
+						<p class="card-text h6">300 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#0099C6; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#0099C6; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Higiena</h5>
-						<p class="card-text">100 PLN</p>
+						<h5 class="card-title h6">Higiena</h5>
+						<p class="card-text h6">100 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#DD4477; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#DD4477; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Dzieci</h5>
-						<p class="card-text">500 PLN</p>
+						<h5 class="card-title h6">Dzieci</h5>
+						<p class="card-text h6">500 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#66AA00; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#66AA00; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Rozrywka</h5>
-						<p class="card-text">200 PLN</p>
+						<h5 class="card-title h6">Rozrywka</h5>
+						<p class="card-text h6">200 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#B82E2E; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#B82E2E; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Wycieczka</h5>
-						<p class="card-text">600 PLN</p>
+						<h5 class="card-title h6">Wycieczka</h5>
+						<p class="card-text h6">600 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#316395; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#316395; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Książki</h5>
-						<p class="card-text">100 PLN</p>
+						<h5 class="card-title h6">Książki</h5>
+						<p class="card-text h6">100 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#994499; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#994499; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Oszczędności</h5>
-						<p class="card-text">500 PLN</p>
+						<h5 class="card-title h6">Oszczędności</h5>
+						<p class="card-text h6">500 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#22AA99; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#22AA99; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Na złotą jesień, czyli emeryturę</h5>
-						<p class="card-text">400 PLN</p>
+						<h5 class="card-title h6">Na złotą jesień, czyli emeryturę</h5>
+						<p class="card-text h6">400 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#AAAA11; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#AAAA11; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Spłata długów</h5>
-						<p class="card-text">30 PLN</p>
+						<h5 class="card-title h6">Spłata długów</h5>
+						<p class="card-text h6">30 PLN</p>
 					</div>
 				</div>
 			</div>
-			<div class="col mb-2">
-				<div class="card text-center" style="background-color:#6633CC; color: white;">
+			<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
+				<div class="card text-center minCardHeight" style="background-color:#6633CC; color: white;">
 					<div class="card-body">
-						<h5 class="card-title">Darowizna</h5>
-						<p class="card-text">50 PLN</p>
+						<h5 class="card-title h6">Darowizna</h5>
+						<p class="card-text h6">50 PLN</p>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	</main>

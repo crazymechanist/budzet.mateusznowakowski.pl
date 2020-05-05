@@ -106,6 +106,9 @@ fill: none;
 stroke-width: 20;
 stroke: currentColor;}
 
+.minCardHeight{
+min-height: 120px;
+}
 
 
 
