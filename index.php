@@ -1,3 +1,12 @@
+<?php
+	session_start();
+		
+	if(isset($_SESSION['zalogowany']) && $_SESSION['zalogowany']==true){
+		header('Location: display.php');
+		exit();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -52,15 +61,15 @@
 							</figcaption>
 						</figure>
 					</div>
-					<form class="form-signin col-sm-6 pl-sm-8">
+					<form action="log-in.php" method="POST" class="form-signin col-sm-6 pl-sm-8">
 						<svg xmlns="http://www.w3.org/2000/svg" class="d-inline-block align-center py-1 my-1" viewBox="-50 275 700 600" fill-rule="evenodd" width="125" height="125" role="img" focusable="false">
 							<?php require('pig_body_svg.php')?>
 						</svg>
 						<h1 class="h2 mb-2 font-weight-normal pb-2">Zaloguj się</h1>
 						<label for="inputEmail" class="sr-only">Adres email</label>
-						<input type="email" id="inputEmail" class="form-control" placeholder="Adres email" required autofocus>
+						<input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adres email" required autofocus>
 						<label for="inputPassword" class="sr-only">Hasło</label>
-						<input type="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+						<input type="password" id="inputPassword" class="form-control" name="pass" placeholder="Hasło" required>
 						<div class="checkbox mb-3">
 							<label>
 								<input type="checkbox" value="remember-me"> Pamiętaj mnie

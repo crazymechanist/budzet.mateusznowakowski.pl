@@ -1,0 +1,15 @@
+### PROTECT FILES ###
+<FilesMatch "\.(htaccess|htpasswd|ini|fla|psd|log|sh|git)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+### PROTECT FOLDERS ###
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteRule (makitweb_cookie|.git) - [F]
+</IfModule>
+
+RewriteEngine on
+RewriteRule logowanie index.php
+RewriteRule dodawanie-wydatku-lub-dochodu create.php
