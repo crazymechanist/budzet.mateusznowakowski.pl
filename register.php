@@ -65,7 +65,7 @@
 						</div>
 						<div class="row py-2">
 							<div class="col">
-								<input type="text" class="form-control" id="login" placeholder="nick lub e-mail">
+								<input type="text" class="form-control" id="email" placeholder="e-mail">
 							</div>
 						</div>
 						<div class="row py-2">

@@ -1,5 +1,5 @@
 <?php
-	$i = 24;
+	/*szyfrowanie symetryczne  $i = 24;
 	$key1 = openssl_random_pseudo_bytes($i, $cstrong);
 	$key2 = openssl_random_pseudo_bytes($i, $cstrong);
 	$plaintext = "message to be encrypted";
@@ -21,5 +21,7 @@
 	if (hash_equals($hmac, $calcmac))//PHP 5.6+ timing attack safe comparison
 	{
 		echo "<br>".$original_plaintext."\n";
-	}
+	} */
+	
+	echo password_hash('abcdefgh', PASSWORD_DEFAULT);
 ?>
