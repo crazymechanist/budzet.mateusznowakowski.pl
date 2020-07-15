@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['isLoggedIn'])){
+		header('Location: index.php');
+		exit();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -95,7 +103,9 @@
 						<div class="col py-0 px-0 py-sm-1 d-block">
 							<div class="col py-0 px-0 py-sm-1 d-block">
 								<div class="d-flex justify-content-end p-2">
-									<button type="button" class="btn btn-link" style="color:white;"> <span class="d-none d-sm-inline-flex">Wyloguj</span> <i class="demo-icon icon-logout"></i> </button>
+									<form action="sign-out.php" method="POST">
+										<button type="submit" class="btn btn-link" name="sign_out" style="color:white;"> <span class="d-none d-sm-inline-flex">Wyloguj</span> <i class="demo-icon icon-logout"></i> </button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -105,7 +115,7 @@
 			
 			<div class="container mt-2">
 				<nav class="nav nav-tabs nav-fill row">
-					<a class="nav-item nav-link col-6" href="create.php"><span class="d-none d-sm-inline-flex"> Dodaj przepływ pieniężny</span><i class="demo-icon icon-plus"></i></a>
+					<a class="nav-item nav-link col-6" href="dodawanie-wydatku-lub-dochodu"><span class="d-none d-sm-inline-flex"> Dodaj przepływ pieniężny</span><i class="demo-icon icon-plus"></i></a>
 					<a class="nav-item nav-link active col-6" ><span class="d-none d-sm-inline-flex"> Przeglądaj przepływy </span> <i class="icon-eye"></i></a>
 				</nav>
 			</div>

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 		
-	if(isset($_SESSION['zalogowany']) && $_SESSION['zalogowany']==true){
+	if(isset($_SESSION['isLoggedIn']) && $_SESSION['isLoggedIn']==true){
 		header('Location: display.php');
 		exit();
 	}
@@ -78,7 +78,7 @@
 						<?=isset($_SESSION['blad']) ? $_SESSION['blad'] : ''  ?>
 						<button class="btn btn-lg btn-primary btn-block mb-4 myColor without_border" type="submit">Zaloguj się</button>
 						<div class="d-block separator"></div>
-						<a href="register.php" class="btn btn-lg btn-secondary btn-block mx-auto mt-4 without_border" role="button" id="register_btn">Załóż konto</a>
+						<a href="rejestracja" class="btn btn-lg btn-secondary btn-block mx-auto mt-4 without_border" role="button" id="register_btn">Załóż konto</a>
 						
 					</form>
 				</div>

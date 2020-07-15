@@ -39,15 +39,14 @@
 				
 				if(password_verify($pass, $row['password'])){
 					unset($_SESSION['blad']); #dla pewności czyścimy błąd logowania
+					$_SESSION['isLoggedIn'] = true;
 					$result->free(); #zwalniamy miejsce w rezultacie zapytania
-					//header('Location: xxx'); #przekierowanie do gra.php
-					echo 'SUKCESS';
+					header('Location: bilans'); #przekierowanie do strony display.php
 				}
 				else{
 					$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
 					header('Location: index.php');
 				}
-				
 			}
 			else{
 				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
@@ -61,5 +60,4 @@
 	}		
 	
 	$connection_SQL->close(); #koniec połącznia z sql
-	
 ?>

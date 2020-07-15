@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(isset($_SESSION['zalogowany'])&&$_SESSION['zalogowany']==true){
+		header('Location: bilans');
+		exit();
+	}	
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -53,29 +61,36 @@
 							<img src="img/seneka.png" alt="Kura" role="img" style="width:300px; height:auto;">
 						</figure>
 					</div>
-					<form class="col-md-6" style="margin-top:100px;">
+					<form action="sign-in.php" method="post" class="col-md-6" style="margin-top:100px;">
 						<h1 class="h2 mb-2 font-weight-normal">Zarejestruj się</h1>
 						<div class="row py-2 pt-5">
 							<div class="col-12 pb-2 col-md-6 pb-md-0">	
-								<input type="text" class="form-control" id="name" placeholder="imię">
+								<input type="text" class="form-control" name="name" id="name" placeholder="imię" value="<?=isset($_SESSION['fr_name']) ? $_SESSION['fr_name'] : '';unset($_SESSION['fr_name']) ?>">
 							</div>
 							<div class="col-12 pt-2 col-md-6 pt-md-0">	
-								<input type="text" class="form-control"  id="surname" placeholder="nazwisko">
+								<input type="text" class="form-control" name="surname" id="surname" placeholder="nazwisko" value="<?=isset($_SESSION['fr_surname']) ? $_SESSION['fr_surname'] : ''; unset($_SESSION['fr_surname']) ?>">
 							</div>
 						</div>
 						<div class="row py-2">
 							<div class="col">
-								<input type="text" class="form-control" id="email" placeholder="e-mail">
+								<input type="email" class="form-control" name="email" id="email" placeholder="e-mail" value="<?=isset($_SESSION['fr_email']) ? $_SESSION['fr_email'] : '' ; unset($_SESSION['fr_email'])?>">
+								<?php if(isset($_SESSION['e_email'])) {echo $_SESSION['e_email']; unset($_SESSION['e_email']);} ?>
 							</div>
 						</div>
 						<div class="row py-2">
 							<div class="col">						
-								<input type="password" class="form-control"  id="pass"  placeholder="hasło">
+								<input type="password" class="form-control" name="pass" id="pass"  placeholder="hasło">
+								<?php if(isset($_SESSION['e_pass'])) {echo $_SESSION['e_pass']; unset($_SESSION['e_pass']);} ?>
+							</div>
+						</div>
+						<div class="row py-2">
+							<div class="col">						
+								<input type="password" class="form-control" name="repeat_pass" id="pass"  placeholder="powtórz hasło">
 							</div>
 						</div>
 						<button class="btn btn-lg mt-5 my_btn btn-primary btn-block mb-4 myColor without_border mx-auto" type="submit">Zarejestruj się</button>
 						<div class="d-block separator"></div>
-						<a href="index.php" class="btn btn-lg btn-secondary btn-block mx-auto mt-4 without_border" role="button" id="register_btn">Strona logowania</a>
+						<a href="logowanie" class="btn btn-lg btn-secondary btn-block mx-auto mt-4 without_border" role="button" id="register_btn">Strona logowania</a>
 					</form>
 				</div>
 			</div>
@@ -98,4 +113,4 @@
 		<script src="js/bootstrap.min.js"></script>
 		
 	</body>
-</html>
+</html>	
