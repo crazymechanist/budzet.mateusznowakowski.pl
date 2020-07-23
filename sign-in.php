@@ -66,10 +66,6 @@
 					$_SESSION['e_pass']='<span style="color:red">Istnieje juz konto przypisane do takiego adresu e-mail</span>';
 				}
 				
-				if(!$result) throw new Exception($connection_SQL->error);
-				
-				$ile_takich_nickow = $result->num_rows;
-				
 				#hurra, wszystkie testy zaliczone, dodajemy gracza do bazy
 				if($everything_all_right==TRUE){
 					if($connection_SQL->query("INSERT INTO users VALUES(NULL, '$email', '$name', '$surname', '$pass_hash')")){

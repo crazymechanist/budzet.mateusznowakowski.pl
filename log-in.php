@@ -41,7 +41,6 @@
 					$_SESSION['isLoggedIn'] = true;
 					$_SESSION['user_id'] = $row['id_user'];
 					$result->free(); #zwalniamy miejsce w rezultacie zapytania
-					echo $_SESSION['user_id'];
 					header('Location: bilans'); #przekierowanie do strony display.php
 				}
 				else{
