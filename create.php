@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['isLoggedIn'])){
+		header('Location: index.php');
+		exit();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
@@ -33,7 +41,7 @@
 						<div class="col-6">
 							<a class="d-flex navbar-brand my-0 py-1" href="#">
 								<svg  xmlns="http://www.w3.org/2000/svg" class="d-inline-block align-center py-1 my-1 mx-auto mx-sm-1 myColor" viewBox="-50 275 700 600" fill-rule="evenodd" width="42" height="42" role="img" focusable="false">
-									<?php require('pig_body_svg.php')?>
+									<?php require('pig_body_svg.php');?>
 								</svg>
 								<h5 class="h3 font-weight-normal align-center ml-1 py-1 my-1 myColor d-none d-sm-inline-flex">Skarbonka</h5>
 							</a>
@@ -41,7 +49,9 @@
 						<div class="col py-0 px-0 py-sm-1 d-block">
 							<div class="col py-0 px-0 py-sm-1 d-block">
 								<div class="d-flex justify-content-end p-2">
-									<button type="button" class="btn btn-link" style="color:white;"> <span class="d-none d-sm-inline-flex">Wyloguj</span> <i class="demo-icon icon-logout"></i> </button>
+									<form action="sign-out.php" method="POST">
+										<button type="submit" class="btn btn-link" name="sign_out" style="color:white;"> <span class="d-none d-sm-inline-flex">Wyloguj</span> <i class="demo-icon icon-logout"></i> </button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -52,7 +62,7 @@
 			<div class="container mt-2">
 				<nav class="nav nav-tabs nav-fill row">
 					<a class="nav-item nav-link active col-6"><span class="d-none d-sm-inline-flex"> Dodaj przepływ pieniężny</span><i class="demo-icon icon-plus"></i></a>
-					<a class="nav-item nav-link col-6" href="display.php"><span class="d-none d-sm-inline-flex"> Przeglądaj przepływy </span> <i class="icon-eye"></i></a>
+					<a class="nav-item nav-link col-6" href="bilans"><span class="d-none d-sm-inline-flex"> Przeglądaj przepływy </span> <i class="icon-eye"></i></a>
 				</nav>
 			</div>
 		</header>
@@ -72,52 +82,36 @@
 						
 						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
 							<div class="card-body">
-								<form action="add_expense.php" method="post">
+								<form action="add-expense.php" method="post">
 									<div class="form-group">
 										<div class="row py-1">
 											<div class="col text-center">
-												<label for="zlote2" class="d-inline-flex p-2">Kwota:</label>
-												<input type="number" class="form-control d-inline-flex" id="zlote2" style="width:30%" placeholder="złoty" min="0">
+												<label for="zlote2"  class="d-inline-flex p-2">Kwota:</label>
+												<input type="number" name="expense_amount_zl" class="form-control d-inline-flex" id="zlote2" style="width:30%" placeholder="złoty" min="0">
 												<div class="d-inline-flex p-2">,</div>
-												<input type="number" class="form-control d-inline-flex" id="grosze2" style="width:30%" placeholder="groszy" min="0" max="99">
+												<input type="number" name="expense_amount_gr" class="form-control d-inline-flex" id="grosze2" style="width:30%" placeholder="groszy" min="0" max="99">
 											</div>
 										</div>
 										<div class="row py-1 justify-content-center">
 											<div class="col text-center">
 												<label for="dateOfExp" class="d-inline-flex p-2" > Data: </label>
-												<input class="form-control d-inline-flex" style="width:50%" type="date" id="dateOfExp">
+												<input class="form-control d-inline-flex" name="date_of_exp" style="width:50%" type="date" id="dateOfExp">
 											</div>
 										</div>
 										
 										<div class="row justify-content-center py-1"><label for="type" class="col-12">Kategoria:</label>
 											<div>
 												<label class="col-12">
-													<select class="custom-select" id="type"> 
-														<option value="j">Jedzenie</option>
-														<option value="m">Mieszkanie</option>
-														<option value="tr">Transport</option>
-														<option value="tel">Telekomunikacja</option>
-														<option value="zdr">Opieka zdrowotna</option>
-														<option value="u">Ubranie</option>
-														<option value="u">Higiena</option>
-														<option value="u">Dzieci</option>
-														<option value="u">Rozrywka</option>
-														<option value="u">Wycieczka</option>
-														<option value="u">Książki</option>
-														<option value="u">Oszczędności</option>
-														<option value="u">Na złotą jesień, czyli emeryturę</option>
-														<option value="u">Spłata długów</option>
-														<option value="u">Darowizna</option>
-														<option value="u">Inne wydatki</option>
-													</select>
+													<?php require('load_expenses_cat.php');?>
 												</label>
 											</div>
 										</div>
 										
 										<div class="row justify-content-center py-1">
-											<div class="col-12"><label for="coment">Komentarz:</label></div>
-											<label class="col-12"><textarea id="coment" class="form-control" rows="3" style="resize:none"></textarea></label>
+											<div class="col-12"><label for="comment">Komentarz:</label></div>
+											<label class="col-12"><textarea id="comment" name="comment"class="form-control" rows="3" style="resize:none"></textarea></label>
 										</div>
+										<?=isset($_SESSION['exp_blad']) ? $_SESSION['exp_blad'] : '' ;unset($_SESSION['exp_blad'])  ?>
 										<input class="btn btn-secondary col-8 py-4" type="submit" value="Dodaj">						
 									</div>
 								</form>

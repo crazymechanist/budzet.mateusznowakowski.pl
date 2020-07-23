@@ -25,7 +25,6 @@
 			$pass = $_POST['pass']; #dane z formularza
 			
 			$email = htmlentities($email,ENT_QUOTES,"UTF-8"); #dodajemy encje
-			
 			$result = $connection_SQL->query(
 			sprintf("SELECT * FROM users WHERE email='%s'",
 			mysqli_real_escape_string($connection_SQL,$email)));
@@ -39,15 +38,16 @@
 				
 				if(password_verify($pass, $row['password'])){
 					unset($_SESSION['blad']); #dla pewności czyścimy błąd logowania
+					$_SESSION['isLoggedIn'] = true;
+					$_SESSION['user_id'] = $row['id_user'];
 					$result->free(); #zwalniamy miejsce w rezultacie zapytania
-					//header('Location: xxx'); #przekierowanie do gra.php
-					echo 'SUKCESS';
+					echo $_SESSION['user_id'];
+					header('Location: bilans'); #przekierowanie do strony display.php
 				}
 				else{
 					$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
 					header('Location: index.php');
 				}
-				
 			}
 			else{
 				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
@@ -61,5 +61,4 @@
 	}		
 	
 	$connection_SQL->close(); #koniec połącznia z sql
-	
 ?>

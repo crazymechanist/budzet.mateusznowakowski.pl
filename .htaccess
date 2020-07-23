@@ -13,3 +13,6 @@ Deny from all
 RewriteEngine on
 RewriteRule logowanie index.php
 RewriteRule dodawanie-wydatku-lub-dochodu create.php
+RewriteRule bilans display.php
+RewriteRule rejestracja register.php
+RewriteRule dziekujemy_za_rejestracje welcome.php
