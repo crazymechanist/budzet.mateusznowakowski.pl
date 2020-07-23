@@ -7,8 +7,6 @@
 	
 	header('Location: logowanie');
 	
-	session_start();
-	
 	require_once "connect.php";
 	mysqli_report(MYSQLI_REPORT_STRICT); #pokazuje jedynie błędy, a nie ostrzeżenia
 	

@@ -68,19 +68,58 @@
 		</header>
 		
 		<main>
+			
+			<div class="modal fade" id="exp_success_mod" tabindex="-1" role="dialog" aria-labelledby="exp_success_mod_lab" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header text-center">
+							<h5 class="modal-title" id="exp_success_mod_lab">Sukcess!</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body text-center">
+							Dodano wydatek
+						</div>
+						<div class="modal-footer ">
+							<button type="button" class="btn btn-secondary px-4" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="inc_success_mod" tabindex="-1" role="dialog" aria-labelledby="inc_success_mod_lab" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header text-center">
+							<h5 class="modal-title" id="inc_success_mod_lab">Sukcess!</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body text-center">
+							Dodano przychód
+						</div>
+						<div class="modal-footer ">
+							<button type="button" class="btn btn-secondary px-4" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="container text-center form_window">
 				<div class="accordion row" id="accordionExample">
 					
 					<div class="card p-0 mx-auto col-md-8">
 						<div class="card-header p-0" id="headingOne">
 							<h2 class="mb-0">
-								<button class="btn btn-primary p-0 m-0 collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="height:3rem; width:100%;">
+								<button class="btn btn-primary p-0 m-0 <?=isset($_SESSION['exp_blad']) ? '' : 'collapsed' ?>" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="<?=isset($_SESSION['exp_blad']) ? 'true' : 'false' ?>" aria-controls="collapseOne" style="height:3rem; width:100%;">
 									Dodaj wydatek
 								</button>
 							</h2>
 						</div>
 						
-						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+						<div id="collapseOne" class="collapse <?=isset($_SESSION['exp_blad']) ? 'show' : '' ?>" aria-labelledby="headingOne" data-parent="#accordionExample">
 							<div class="card-body">
 								<form action="add-expense.php" method="post">
 									<div class="form-group">
@@ -187,6 +226,24 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 		
 		<script src="js/bootstrap.min.js"></script>
+		<?=isset($_SESSION['exp_succ']) ? 
+			'<script>
+			$(document).ready(function(){
+			$("#exp_success_mod").modal();
+			});
+			</script>' : '' ;
+			unset($_SESSION['exp_succ'])  
+		?>
+		
+		<?=isset($_SESSION['inc_succ']) ? 
+			'<script>
+			$(document).ready(function(){
+			$("#inc_success_mod").modal();
+			});
+			</script>' : '' ;
+			unset($_SESSION['inc_succ'])  
+		?>
+		
 		
 	</body>
-</html>
+</html>		
