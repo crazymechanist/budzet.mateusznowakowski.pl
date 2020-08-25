@@ -72,7 +72,7 @@
 						<input type="password" id="inputPassword" class="form-control" name="pass" placeholder="Hasło" required>
 						<div class="checkbox mb-3">
 							<label>
-								<input type="checkbox" value="remember-me"> Pamiętaj mnie
+								<input type="checkbox" value="remember-me" disabled> Pamiętaj mnie <i>(na razie nieaktywne)</i>
 							</label>
 						</div>
 						<?=isset($_SESSION['blad']) ? $_SESSION['blad'] : '' ;unset($_SESSION['blad'])  ?>

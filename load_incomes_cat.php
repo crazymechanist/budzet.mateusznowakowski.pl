@@ -1,13 +1,8 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
-	define('ERROR_LOG_FILE', 'logs/load_inc_app_errors.xml');
-	
-	header('Location: logowanie');
 	
 	include_once 'CustomException.php';
-	
-	session_start();
 	
 	require_once "connect.php";
 	mysqli_report(MYSQLI_REPORT_STRICT); #pokazuje jedynie błędy, a nie ostrzeżenia
@@ -26,7 +21,7 @@
 			$how_many_results = $result->num_rows;
 			
 			if($how_many_results==0){
-				echo '<select class="custom-select" name="categoty_of_exp" id="type2">';
+				echo '<select class="custom-select" name="categoty_of_inc" id="type2">';
 				echo '<option disabled value="brak">BRAK</option>';
 				echo '</select>';
 			}

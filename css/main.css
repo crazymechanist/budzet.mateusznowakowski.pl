@@ -1,5 +1,4 @@
-body
-{
+body{
 	background-color: white;
 	color: black;
     font-family: 'Open Sans', sans-serif;
@@ -10,7 +9,7 @@ body
 border-style: none !important;}
 
 .myColor{
-background-color: #9400D3 !important;
+	background-color: #9400D3 !important;
 color: white !important;}
 
 .min_width{
@@ -18,58 +17,44 @@ color: white !important;}
 }
 
 .form_window {
-
 	-ms-flex-align: center;
 	align-items: center;
 	padding-top: 80px;
-
 }
 
 .separator{
 	min-height:5px;
-	border-bottom: 1px ridge black;}
-	
+border-bottom: 1px ridge black;}
+
 .form-signin {
-  width: 100%;
-  max-width: 500px;
-  padding: 15px;
+	width: 100%;
+	max-width: 500px;
+	padding: 15px;
 }
 
 .form-signin .checkbox {
-  font-weight: 400;
+	font-weight: 400;
 }
 .form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 14px;
+	position: relative;
+	box-sizing: border-box;
+	height: auto;
+	padding: 10px;
+	font-size: 14px;
 }
 .form-signin .form-control:focus {
-  z-index: 2;
+	z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
-
-@media (min-width: 768px) {
-.bd-placeholder-img-lg {
-font-size: 3.5rem;
-}
-}
-
-@media (min-width: 1200px)
-{
-
-}
-
 
 .my_btn{
 	max-width: 320px;
@@ -82,31 +67,39 @@ font-size: 3.5rem;
 }
 
 .pig_body, .pig_ear{
-fill: none;
-stroke-width: 20;
-stroke: currentColor;
+	fill: none;
+	stroke-width: 20;
+	stroke: currentColor;
 }
 
 .pig_nose{
-fill: none;
-stroke-width: 20;
-stroke: currentColor;
+	fill: none;
+	stroke-width: 20;
+	stroke: currentColor;
 }
 
 .pig_detail{
-stroke: currentColor;
-stroke-width: 20;
+	stroke: currentColor;
+	stroke-width: 20;
 fill: currentColor;}
 
 .pig_leg{
-fill: none;
-stroke-width: 20;
-stroke: currentColor;}
-
-.minCardHeight{
-min-height: 120px;
+	fill: none;
+	stroke-width: 20;
+	stroke: currentColor;
 }
 
+.minCardHeight{
+	min-height: 120px;
+}
 
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 
-
+@media (min-width: 1200px)
+{
+	
+}
