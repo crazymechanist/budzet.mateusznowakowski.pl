@@ -148,7 +148,7 @@
 										
 										<div class="row justify-content-center py-1">
 											<div class="col-12"><label for="comment">Komentarz:</label></div>
-											<label class="col-12"><textarea id="comment" name="comment"class="form-control" rows="3" style="resize:none"></textarea></label>
+											<label class="col-12"><textarea id="comment" name="comment" class="form-control" rows="3" style="resize:none"></textarea></label>
 										</div>
 										<?=isset($_SESSION['exp_blad']) ? $_SESSION['exp_blad'] : '' ;unset($_SESSION['exp_blad'])  ?>
 										<input class="btn btn-secondary col-8 py-4" type="submit" value="Dodaj">						
@@ -167,38 +167,35 @@
 						</div>
 						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 							<div class="card-body">
-								<form action="add_income.php" method="post">
+								<form action="add-income.php" method="post">
 									<div class="form-group">
 										<div class="row py-1">
 											<div class="col text-center">
 												<label for="zlote" class="d-inline-flex p-2">Kwota:</label>
-												<input type="number" class="form-control d-inline-flex" id="zlote" style="width:30%" placeholder="złoty" min="0">
+												<input type="number" name="income_amount_zl"  class="form-control d-inline-flex" id="zlote" style="width:30%" placeholder="złoty" min="0">
 												<div class="d-inline-flex p-2">,</div>
-												<input type="number" class="form-control d-inline-flex" id="grosze" style="width:30%" placeholder="groszy" min="0" max="99">
+												<input type="number" name="income_amount_gr" class="form-control d-inline-flex" id="grosze" style="width:30%" placeholder="groszy" min="0" max="99">
 											</div>
 										</div>
 										<div class="row py-1 justify-content-center">
 											<div class="col text-center">
-												<label for="dateOfExp" class="d-inline-flex p-2" > Data: </label>
-												<input class="form-control d-inline-flex" style="width:50%" type="date" id="dateOfExp2">
+												<label for="dateOfInc" class="d-inline-flex p-2" > Data: </label>
+												<input class="form-control d-inline-flex" name="date_of_inc" style="width:50%" type="date" id="dateOfInc">
 											</div>
 										</div>
 										<div class="row justify-content-center py-1"><label for="type" class="col-12">Kategoria:</label>
 											<div>
 												<label class="col-12">
-													<select class="custom-select" id="type2"> 
-														<option value="w">Wynagrodzenie</option>
-														<option value="o">Odsetki bankowe</option>
-														<option value="s">Sprzedaż na allegro</option>
-														<option value="i">Inne</option>
-													</select>
+													<label class="col-12">
+														<?php require('load_incomes_cat.php');?>
+													</label>
 												</label>
 											</div>
 										</div>
 										
 										<div class="row justify-content-center py-1">
 											<div class="col-12"><label for="coment2">Komentarz:</label></div>
-											<label class="col-12"><textarea id="coment2" class="form-control" style="resize:none;" rows="3"></textarea></label>
+											<label class="col-12"><textarea id="coment2" name="comment2" class="form-control" style="resize:none;" rows="3"></textarea></label>
 										</div>
 										<input class="btn btn-secondary col-8 py-4" type="submit" value="Dodaj">						
 									</div>

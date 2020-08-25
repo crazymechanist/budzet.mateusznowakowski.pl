@@ -1,9 +1,61 @@
 <?php
 	session_start();
+	
+	#redirect to index
 	if(!isset($_SESSION['isLoggedIn'])){
 		header('Location: index.php');
 		exit();
 	}
+	
+	#assign time period variable if not exist
+	if(!isset($_SESSION['time_period'])){
+		$_SESSION['time_period'] = 'Bieżący miesiąc';
+		$first_day_of_month = strtotime("first day of this month");
+		$last_day_of_month = strtotime("last day of this month");
+		$_SESSION['initial_date'] = $first_day_of_month;
+		$_SESSION['final_date'] = $last_day_of_month;
+		$_SESSION['user_initial_date'] = date("Y-m-d", $first_day_of_month );
+		$_SESSION['user_final_date'] = date("Y-m-d", $last_day_of_month );
+	} 
+	
+	#clic on left arrow
+	if (isset($_POST['left']) ) {
+		if($_SESSION['time_period'] == 'Bieżący miesiąc'){
+			$_SESSION['time_period'] = 'Zeszły miesiąc';
+			$_SESSION['initial_date'] = strtotime("first day of last month");
+			$_SESSION['final_date'] = strtotime("last day of last month");
+		}
+		elseif ($_SESSION['time_period'] == 'Zeszły miesiąc'){
+			$_SESSION['time_period']= 'Inny okres';
+			$_SESSION['initial_date'] = strtotime($_SESSION['user_initial_date']);
+			$_SESSION['final_date'] = strtotime($_SESSION['user_final_date']);
+		} 
+		else{
+			$_SESSION['time_period'] = 'Bieżący miesiąc';
+			$_SESSION['initial_date'] = strtotime("first day of this month");
+			$_SESSION['final_date'] = strtotime("last day of this month");
+		}
+	}
+	
+	#clic on right arrow
+	if (isset($_POST['right']) ) {
+		if($_SESSION['time_period'] == 'Bieżący miesiąc'){
+			$_SESSION['time_period']= 'Inny okres';
+			$_SESSION['initial_date'] = strtotime($_SESSION['user_initial_date']);
+			$_SESSION['final_date'] = strtotime($_SESSION['user_final_date']);
+		}
+		elseif ($_SESSION['time_period'] == 'Inny okres'){
+			$_SESSION['time_period']= 'Zeszły miesiąc';
+			$_SESSION['initial_date'] = strtotime("first day of last month");
+			$_SESSION['final_date'] = strtotime("last day of last month");;
+		}
+		else{
+			$_SESSION['time_period'] = 'Bieżący miesiąc';
+			$_SESSION['initial_date'] = strtotime("first day of this month");
+			$_SESSION['final_date'] = strtotime("last day of this month");
+		}
+	}
+	
 ?>
 
 <!DOCTYPE html>
@@ -30,42 +82,56 @@
 			
 			function drawChart() {
 				
+				
+				
 				var data = google.visualization.arrayToDataTable([
-				['Wydatek', 'Kwota'],
-				['Jedzenie', 800],
-				['Transport',     50, ],
-				['Telekomunikacja',      100],
-				['Opieka zdrowotna',  300],
-				['Ubranie', 300],
-				['Higiena',    100],
-				['Dzieci',    500],
-				['Rozrywka',    200],
-				['Wycieczka',    600],
-				['Książki',    100],
-				['Oszczędności',    500],
-				['Na złotą jesień, czyli emeryturę',    400],
-				['Spłata długów	',    30],
-				['Darowizna',    50],
+				<?php
+					$expenses = array(
+					"Jedzenie" => 800 ,
+					"Transport" => 50 ,
+					"Telekomunikacja" => 100,
+					"Opieka zdrowotna" => 300,
+					"Ubranie" => 300,
+					"Higiena" => 100,
+					"Dzieci" => 500,
+					"Rozrywka" => 200,
+					"Wycieczka" => 600,
+					"Książki" => 100,
+					"Oszczędności" => 500,
+					"Na złotą jesień, czyli emeryturę" => 400,
+					"Spłata długów	" => 30,
+					"Darowizna" => 50);
+					
+					$_SESSION['chart_contents'] = $expenses;
+					
+					echo '[\'Wydatek\', \'Kwota\'],';
+					#echo nl2br("\r\n");
+					
+					foreach ($expenses as $expense_name => $expense) {
+						echo '[\''.$expense_name.'\' , '.$expense.'] ,';
+						#echo nl2br("\r\n");
+					}
+				?>
 				]);
 				
 				var options = {
 					legend: 'none',
 					pieSliceText: 'label',
 					slices: {
-						0: { color: '#3366CC' },
-						1: { color: '#dc3912' },
-						2: { color: '#FF9900' },
-						3: { color: '#109618' },
-						4: { color: '#990099' },
-						5: { color: '#0099C6' },
-						6: { color: '#DD4477' },
-						7: { color: '#66AA00' },
-						8: { color: '#B82E2E' },
-						9: { color: '#316395' },
-						10: { color: '#994499' },
-						11: { color: '#22AA99' },
-						12: { color: '#AAAA11' },
-						13: { color: '#6633CC' },
+						<?php
+							$colors = array(
+							"#3366CC" , "#dc3912" , "#FF9900" , "#109618" , "#990099" ,
+							"#0099C6" , "#DD4477" , "#66AA00" , "#B82E2E" , "#316395" , 
+							"#994499" , "#22AA99" , "#AAAA11" , "#6633CC");
+							$_SESSION['chart_colors'] = $colors;
+							$i = 0;
+							foreach ($colors as $color) {
+								echo $i.': { color: \''.$color.'\' }, ';
+								#echo nl2br("\r\n");
+								$i++;
+							}
+						?>
+						
 					},
 					width: '100%',
 					height: '500px'
@@ -134,153 +200,66 @@
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body">
-									<form action="change_dete.php" method="post">
+								<form action="change_date.php" method="post">
+									<div class="modal-body">
 										<div>
 											<label for="initial_date" class="d-inline-flex p-2" > Data początkowa: </label>
-											<input class="form-control d-inline-flex" style="width:50%" type="date" id="initial_date">
+											<input class="form-control d-inline-flex" style="width:50%" type="date" name="user_initial_date" id="initial_date">
 										</div>
 										<div>
 											<label for="final_date" class="d-inline-flex p-2" > Data końcowa: </label>
-											<input class="form-control d-inline-flex" style="width:50%" type="date" id="final_date">
+											<input class="form-control d-inline-flex" style="width:50%" type="date" name="user_final_date" id="final_date">
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Wyjdź</button>
-									<button type="button" class="btn btn-primary">Zapisz</button>
-								</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Wyjdź</button>
+										<button type="submit" class="btn btn-primary">Zapisz</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="position-relative">
+					<div class="position-relative text-center"><h2><?php 
+						$f_date=$_SESSION['initial_date'];
+						$s_date=$_SESSION['final_date']; 
+					echo $_SESSION['time_period'].' '.date("Y-m-d", $f_date ).' - '.date("Y-m-d", $s_date); ?> </h2></div>
 					<div id="piechart" class="position-relative" style="height:600px;"></div>
 					<div class="row align-items-center" style="position: absolute;	width: 100%;	height: 100%;	left: 0px;	bottom: 0px;">
 						<div class="col text-left">
-							<i class="icon-left-open-outline"></i>
+							<form action="" method="post">
+								<button class="btn btn-outline-secondary" name="left" type="submit"> <i class="icon-left-open-outline"></i></button>
+							</form>
 						</div>
 						<div class="col text-center">
 						</div>
 						<div class="col text-right">
-							<i class="icon-right-open-outline"></i>
+							<form action="" method="post">
+								<button class="btn btn-outline-secondary" name="right" type="submit"> <i class="icon-right-open-outline"></i> </button>
+							</form>
 						</div>
 					</div>
 				</div>
 				
 				<div class="row">
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#3366CC; color: white">
-							<div class="card-body">
-								<h5 class="card-title h6">Jedzenie</h5>
-								<p class="card-text h6">800 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#dc3912; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Transport</h5>
-								<p class="card-text h6">50 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#FF9900; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Telekomunikacja</h5>
-								<p class="card-text h6">100 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#109618; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Opieka zdrowotna</h5>
-								<p class="card-text h6">300 PLN</p>
-							</div>
-						</div>
-					</div>			
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#990099; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Ubranie</h5>
-								<p class="card-text h6">300 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#0099C6; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Higiena</h5>
-								<p class="card-text h6">100 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#DD4477; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Dzieci</h5>
-								<p class="card-text h6">500 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#66AA00; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Rozrywka</h5>
-								<p class="card-text h6">200 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#B82E2E; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Wycieczka</h5>
-								<p class="card-text h6">600 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#316395; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Książki</h5>
-								<p class="card-text h6">100 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#994499; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Oszczędności</h5>
-								<p class="card-text h6">500 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#22AA99; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Na złotą jesień, czyli emeryturę</h5>
-								<p class="card-text h6">400 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#AAAA11; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Spłata długów</h5>
-								<p class="card-text h6">30 PLN</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-6 col-md-4 col-lg-3 my-1 px-1">
-						<div class="card text-center minCardHeight" style="background-color:#6633CC; color: white;">
-							<div class="card-body">
-								<h5 class="card-title h6">Darowizna</h5>
-								<p class="card-text h6">50 PLN</p>
-							</div>
-						</div>
-					</div>
+					<?php
+						$expenses = $_SESSION['chart_contents'];
+						$colors = $_SESSION['chart_colors'];
+						$i=0;
+						
+						foreach ($expenses as $expense_name => $expense) {
+							echo '<div class="col-6 col-md-4 col-lg-3 my-1 px-1">';
+								echo '<div class="card text-center minCardHeight" style="background-color:'.$colors[$i].'; color: white">';
+									echo '<div class="card-body">';
+										echo '<h5 class="card-title h6">'.$expense_name.'</h5>';
+										echo '<p class="card-text h6">'.$expense.'PLN</p>';
+									echo '</div>';
+								echo '</div>';
+							echo '</div>';
+							$i++;
+						}
+					?>
 				</div>
 			</div>
 		</main>
@@ -304,4 +283,4 @@
 		<script src="js/bootstrap.min.js"></script>
 		
 	</body>
-</html>
+</html>					

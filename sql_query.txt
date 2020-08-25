@@ -1,0 +1,35 @@
+SELECT ex.id_expense FROM expenses AS ex
+INNER JOIN users_expenses AS uex
+ON ex.id_expense = uex.id_expense
+
+SELECT ex.id_expense , uex.id_user , ex.expense_date , ex.id_expense_category , ex.amount_of_money , ex.amount_of_money , ex.description FROM expenses AS ex
+INNER JOIN users_expenses AS uex
+ON ex.id_expense = uex.id_expense
+WHERE uex.id_user='1'
+
+SELECT ex.id_expense , uex.id_user , ex.expense_date , ex.id_expense_category, excat.expense_category , ex.amount_of_money , ex.description FROM expenses AS ex
+INNER JOIN users_expenses AS uex
+ON ex.id_expense = uex.id_expense
+INNER JOIN expenses_category AS excat
+ON ex.id_expense_category = excat.id_expense_category
+WHERE uex.id_user='1'
+AND ex.expense_date > '2020-01-25' AND ex.expense_date < NOW()
+
+SELECT ex.id_expense , uex.id_user , ex.expense_date , ex.id_expense_category, excat.expense_category , sum(ex.amount_of_money) , ex.description FROM expenses AS ex
+INNER JOIN users_expenses AS uex
+ON ex.id_expense = uex.id_expense
+INNER JOIN expenses_category AS excat
+ON ex.id_expense_category = excat.id_expense_category
+WHERE uex.id_user='1'
+AND ex.expense_date > '2020-01-25' AND ex.expense_date < NOW() 
+GROUP BY ex.id_expense_category;
+
+SELECT excat.expense_category AS Kategoria , sum(ex.amount_of_money) AS Kwota FROM expenses AS ex
+INNER JOIN users_expenses AS uex
+ON ex.id_expense = uex.id_expense
+INNER JOIN expenses_category AS excat
+ON ex.id_expense_category = excat.id_expense_category
+WHERE uex.id_user='1'
+AND ex.expense_date > '2020-01-25' AND ex.expense_date < NOW() 
+GROUP BY excat.expense_category
+

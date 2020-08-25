@@ -1,11 +1,9 @@
 <?php
 	error_reporting(E_ALL);
 	ini_set('display_errors', 'off');
-	define('ERROR_LOG_FILE', 'logs/load_exp_app_errors.xml');
+	define('ERROR_LOG_FILE', 'logs/load_app_errors.xml');
 	
 	include_once 'CustomException.php';
-	
-	header('Location: logowanie');
 	
 	require_once "connect.php";
 	mysqli_report(MYSQLI_REPORT_STRICT); #pokazuje jedynie błędy, a nie ostrzeżenia
