@@ -2,3 +2,7 @@ img/temp
 makitweb_cookie/
 test.php
 test3.php
+logs/load_exp_app_errors.xml
+logs/load_expenses_app_errors.xml
+sql_query.txt 
+test2.html 

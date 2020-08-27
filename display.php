@@ -1,4 +1,5 @@
 <?php
+	require_once "load_expenses.php";
 	session_start();
 	
 	#redirect to index
@@ -14,8 +15,8 @@
 		$last_day_of_month = strtotime("last day of this month");
 		$_SESSION['initial_date'] = $first_day_of_month;
 		$_SESSION['final_date'] = $last_day_of_month;
-		$_SESSION['user_initial_date'] = date("Y-m-d", $first_day_of_month );
-		$_SESSION['user_final_date'] = date("Y-m-d", $last_day_of_month );
+		$_SESSION['user_initial_date'] = $first_day_of_mont;
+		$_SESSION['user_final_date'] = $last_day_of_month ;	
 	} 
 	
 	#clic on left arrow
@@ -55,7 +56,9 @@
 			$_SESSION['final_date'] = strtotime("last day of this month");
 		}
 	}
-	
+	$f_date=date("Y-m-d", $_SESSION['initial_date']);
+	$s_date=date("Y-m-d", $_SESSION['final_date']); 
+	load_expenses($f_date , $s_date , $_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -86,23 +89,12 @@
 				
 				var data = google.visualization.arrayToDataTable([
 				<?php
-					$expenses = array(
-					"Jedzenie" => 800 ,
-					"Transport" => 50 ,
-					"Telekomunikacja" => 100,
-					"Opieka zdrowotna" => 300,
-					"Ubranie" => 300,
-					"Higiena" => 100,
-					"Dzieci" => 500,
-					"Rozrywka" => 200,
-					"Wycieczka" => 600,
-					"Książki" => 100,
-					"Oszczędności" => 500,
-					"Na złotą jesień, czyli emeryturę" => 400,
-					"Spłata długów	" => 30,
-					"Darowizna" => 50);
 					
-					$_SESSION['chart_contents'] = $expenses;
+					$expenses = $_SESSION['chart_contents'];
+					
+					if(empty($expenses)){
+						$expenses = [ "Brak wydatków" => 100];
+					}
 					
 					echo '[\'Wydatek\', \'Kwota\'],';
 					#echo nl2br("\r\n");
@@ -222,9 +214,9 @@
 				</div>
 				<div class="position-relative">
 					<div class="position-relative text-center"><h2><?php 
-						$f_date=$_SESSION['initial_date'];
-						$s_date=$_SESSION['final_date']; 
-					echo $_SESSION['time_period'].' '.date("Y-m-d", $f_date ).' - '.date("Y-m-d", $s_date); ?> </h2></div>
+						$f_date=date("Y-m-d", $_SESSION['initial_date']);
+						$s_date=date("Y-m-d", $_SESSION['final_date']); 
+					echo $_SESSION['time_period'].' '.$f_date.' - '.$s_date;?> </h2></div>
 					<div id="piechart" class="position-relative" style="height:600px;"></div>
 					<div class="row align-items-center" style="position: absolute;	width: 100%;	height: 100%;	left: 0px;	bottom: 0px;">
 						<div class="col text-left">
@@ -250,12 +242,12 @@
 						
 						foreach ($expenses as $expense_name => $expense) {
 							echo '<div class="col-6 col-md-4 col-lg-3 my-1 px-1">';
-								echo '<div class="card text-center minCardHeight" style="background-color:'.$colors[$i].'; color: white">';
-									echo '<div class="card-body">';
-										echo '<h5 class="card-title h6">'.$expense_name.'</h5>';
-										echo '<p class="card-text h6">'.$expense.'PLN</p>';
-									echo '</div>';
-								echo '</div>';
+							echo '<div class="card text-center minCardHeight" style="background-color:'.$colors[$i].'; color: white">';
+							echo '<div class="card-body">';
+							echo '<h5 class="card-title h6">'.$expense_name.'</h5>';
+							echo '<p class="card-text h6">'.$expense.'PLN</p>';
+							echo '</div>';
+							echo '</div>';
 							echo '</div>';
 							$i++;
 						}
