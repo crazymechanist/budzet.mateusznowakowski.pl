@@ -8,16 +8,20 @@
 		exit();
 	}
 	
+	$first_day_of_month = strtotime("first day of this month");
+	$last_day_of_month = strtotime("last day of this month");
+	
 	#assign time period variable if not exist
 	if(!isset($_SESSION['time_period'])){
 		$_SESSION['time_period'] = 'Bieżący miesiąc';
-		$first_day_of_month = strtotime("first day of this month");
-		$last_day_of_month = strtotime("last day of this month");
 		$_SESSION['initial_date'] = $first_day_of_month;
 		$_SESSION['final_date'] = $last_day_of_month;
-		$_SESSION['user_initial_date'] = $first_day_of_mont;
-		$_SESSION['user_final_date'] = $last_day_of_month ;	
 	} 
+	
+	if(!isset($_SESSION['user_initial_date'])){
+		$_SESSION['user_initial_date'] = $first_day_of_month;
+		$_SESSION['user_final_date'] = $last_day_of_month ;	
+	}
 	
 	#clic on left arrow
 	if (isset($_POST['left']) ) {
@@ -28,13 +32,13 @@
 		}
 		elseif ($_SESSION['time_period'] == 'Zeszły miesiąc'){
 			$_SESSION['time_period']= 'Inny okres';
-			$_SESSION['initial_date'] = strtotime($_SESSION['user_initial_date']);
-			$_SESSION['final_date'] = strtotime($_SESSION['user_final_date']);
+			$_SESSION['initial_date'] = $_SESSION['user_initial_date'];
+			$_SESSION['final_date'] = $_SESSION['user_final_date'];
 		} 
 		else{
 			$_SESSION['time_period'] = 'Bieżący miesiąc';
 			$_SESSION['initial_date'] = strtotime("first day of this month");
-			$_SESSION['final_date'] = strtotime("last day of this month");
+			$_SESSION['final_date'] = strtotime("last day of this month");			
 		}
 	}
 	
@@ -42,8 +46,8 @@
 	if (isset($_POST['right']) ) {
 		if($_SESSION['time_period'] == 'Bieżący miesiąc'){
 			$_SESSION['time_period']= 'Inny okres';
-			$_SESSION['initial_date'] = strtotime($_SESSION['user_initial_date']);
-			$_SESSION['final_date'] = strtotime($_SESSION['user_final_date']);
+			$_SESSION['initial_date'] = $_SESSION['user_initial_date'];
+			$_SESSION['final_date'] = $_SESSION['user_final_date'];
 		}
 		elseif ($_SESSION['time_period'] == 'Inny okres'){
 			$_SESSION['time_period']= 'Zeszły miesiąc';
@@ -56,6 +60,7 @@
 			$_SESSION['final_date'] = strtotime("last day of this month");
 		}
 	}
+	
 	$f_date=date("Y-m-d", $_SESSION['initial_date']);
 	$s_date=date("Y-m-d", $_SESSION['final_date']); 
 	load_expenses($f_date , $s_date , $_SESSION['user_id']);
@@ -106,8 +111,11 @@
 				?>
 				]);
 				
+				var chartwidth = $('#chartparent').width();
+				
 				var options = {
 					legend: 'none',
+					chartArea:{left:"5%",top:10,width:"90%",height:"90%"},
 					pieSliceText: 'label',
 					slices: {
 						<?php
@@ -119,14 +127,11 @@
 							$i = 0;
 							foreach ($colors as $color) {
 								echo $i.': { color: \''.$color.'\' }, ';
-								#echo nl2br("\r\n");
 								$i++;
 							}
 						?>
 						
 					},
-					width: '100%',
-					height: '500px'
 				};
 				
 				var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -181,7 +186,7 @@
 		
 		<main>
 			<div class="container">
-				<div class="row justify-content-end">
+				<div class="row justify-content-end m-0">
 					<button type="button" class="btn btn-outline-dark mb-2 mt-4" data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="icon-calendar"></i> Zmień zakres dat</button>
 					<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg" id="myLargeModalLabel">
@@ -212,27 +217,32 @@
 						</div>
 					</div>
 				</div>
-				<div class="position-relative">
-					<div class="position-relative text-center"><h2><?php 
-						$f_date=date("Y-m-d", $_SESSION['initial_date']);
-						$s_date=date("Y-m-d", $_SESSION['final_date']); 
-					echo $_SESSION['time_period'].' '.$f_date.' - '.$s_date;?> </h2></div>
-					<div id="piechart" class="position-relative" style="height:600px;"></div>
-					<div class="row align-items-center" style="position: absolute;	width: 100%;	height: 100%;	left: 0px;	bottom: 0px;">
-						<div class="col text-left">
-							<form action="" method="post">
-								<button class="btn btn-outline-secondary" name="left" type="submit"> <i class="icon-left-open-outline"></i></button>
-							</form>
+				<div class="row m-0">
+					<div style="display: flex; align-items: center; width: 48px;">
+						<form action="" method="post">
+							<button class="btn btn-outline-secondary" name="left" type="submit"> <i class="icon-left-open-outline"></i></button>
+						</form>
+					</div>
+					<div class="col text-center p-0">
+						<div>
+							<h2 class="h4"><?php 
+								$f_date=date("Y-m-d", $_SESSION['initial_date']);
+								$s_date=date("Y-m-d", $_SESSION['final_date']); 
+							echo $_SESSION['time_period'].' '.$f_date.' do '.$s_date;?> 
+							</h2>
 						</div>
-						<div class="col text-center">
-						</div>
-						<div class="col text-right">
-							<form action="" method="post">
-								<button class="btn btn-outline-secondary" name="right" type="submit"> <i class="icon-right-open-outline"></i> </button>
-							</form>
+						<div style="position: relative; width: 100%; padding-top: 70%; margin-top: 10%">
+							<div  id="piechart" style="position:  absolute; top: 0; left: 0; bottom: 0; right: 0; text-align: center;">
+							</div>
 						</div>
 					</div>
+					<div style="display: flex; align-items: center; width: 48px;">
+						<form action="" method="post">
+							<button class="btn btn-outline-secondary" name="right" type="submit"> <i class="icon-right-open-outline"></i> </button>
+						</form>
+					</div>
 				</div>
+				
 				
 				<div class="row">
 					<?php
@@ -245,34 +255,34 @@
 							echo '<div class="card text-center minCardHeight" style="background-color:'.$colors[$i].'; color: white">';
 							echo '<div class="card-body">';
 							echo '<h5 class="card-title h6">'.$expense_name.'</h5>';
-							echo '<p class="card-text h6">'.$expense.'PLN</p>';
-							echo '</div>';
-							echo '</div>';
-							echo '</div>';
-							$i++;
-						}
-					?>
-				</div>
+						echo '<p class="card-text h6">'.$expense.'PLN</p>';
+						echo '</div>';
+						echo '</div>';
+						echo '</div>';
+						$i++;
+					}
+				?>
 			</div>
-		</main>
-		
-		
-		
-		<footer>
-			<div class="container justify-content-center mt-5">
-				<div class="row justify-content-center">
-					<p class="mt-5 mb-3 text-muted"><a class="mr-1" href="#">Mateusz Nowakowski </a> &copy; 2020</p>
-				</div>
+		</div>
+	</main>
+	
+	
+	
+	<footer>
+		<div class="container justify-content-center mt-5">
+			<div class="row justify-content-center">
+				<p class="mt-5 mb-3 text-muted"><a class="mr-1" href="#">Mateusz Nowakowski </a> &copy; 2020</p>
 			</div>
-		</footer>
-		
-		
-		
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-		
-		<script src="js/bootstrap.min.js"></script>
-		
-	</body>
+		</div>
+	</footer>
+	
+	
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	
+	<script src="js/bootstrap.min.js"></script>
+	
+</body>
 </html>					

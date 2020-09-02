@@ -26,10 +26,11 @@
 		}
 		
 		if($everything_all_right==1){
-			echo $_SESSION['user_initial_date'] = $date1;
-			echo $_SESSION['user_final_date'] = $date2;
-			$_SESSION['initial_date'] = strtotime($_SESSION['user_initial_date']);
-			$_SESSION['final_date'] = strtotime($_SESSION['user_final_date']);
+			$_SESSION['user_initial_date'] = strtotime($date1);
+			$_SESSION['user_final_date'] = strtotime($date2);
+			
+			$_SESSION['initial_date'] = $_SESSION['user_initial_date'];
+			$_SESSION['final_date'] = $_SESSION['user_final_date'];
 			$_SESSION['time_period'] = 'Inny okres';
 		}	
 	}		
