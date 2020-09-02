@@ -6,7 +6,7 @@
 	}
 	else{
 		unset($_SESSION['register_suceess']);
-		header('Refresh: 5; URL=http://localhost/twojakieszen/logowanie'); #przekierowanie
+		header('Refresh: 2; URL=http://localhost/twojakieszen/logowanie'); #przekierowanie
 	}
 ?>
 
