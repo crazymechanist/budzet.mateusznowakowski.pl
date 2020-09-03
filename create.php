@@ -138,12 +138,12 @@
 											</div>
 										</div>
 										
-										<div class="row justify-content-center py-1"><label for="type" class="col-12">Kategoria:</label>
+										<div class="row justify-content-center py-1">
+											<label for="type" class="col-12">Kategoria:</label>
 											<div>
-												<label class="col-12">
-													<?php require('load_expenses_cat.php');?>
-												</label>
+												<?php require('load_expenses_cat.php');?>
 											</div>
+											<a href="#" type="button" class="btn btn-dark mx-3" data-toggle="tooltip" data-placement="right" title="Dodaj kategorię (nieaktywne)">+</a>
 										</div>
 										
 										<div class="row justify-content-center py-1">
@@ -183,14 +183,12 @@
 												<input class="form-control d-inline-flex" name="date_of_inc" style="width:50%" type="date" id="dateOfInc">
 											</div>
 										</div>
+										
 										<div class="row justify-content-center py-1"><label for="type" class="col-12">Kategoria:</label>
 											<div>
-												<label class="col-12">
-													<label class="col-12">
-														<?php require('load_incomes_cat.php');?>
-													</label>
-												</label>
+												<?php require('load_incomes_cat.php');?>												
 											</div>
+											<a href="#" type="button" class="btn btn-dark mx-3" data-toggle="tooltip" data-placement="right" title="Dodaj kategorię (nieaktywne)">+</a>
 										</div>
 										
 										<div class="row justify-content-center py-1">
